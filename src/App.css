@@ -9,10 +9,10 @@
 
 body {
   background: linear-gradient(135deg, #1a0f3d, #2d1b69);
-  color: white;
   min-height: 100vh;
   padding: 20px;
   line-height: 1.6;
+  color: white; /* Keep this for general text */
 }
 
 .App {
@@ -29,6 +29,7 @@ body {
   margin-bottom: 30px;
   border: 3px solid #61dafb;
   box-shadow: 0 10px 30px rgba(97, 218, 251, 0.2);
+  color: white; /* Explicitly set header text to white */
 }
 
 .header h1 {
@@ -43,7 +44,7 @@ body {
 
 .react-badge {
   background: #61dafb;
-  color: black;
+  color: black !important; /* Force black text */
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 1rem;
@@ -77,6 +78,7 @@ body {
   border-radius: 20px;
   padding: 25px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white; /* Explicit white text */
 }
 
 .stats-panel h3 {
@@ -177,6 +179,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  color: white; /* Explicit white text */
 }
 
 .dealer-section, .player-section {
@@ -194,7 +197,7 @@ body {
   gap: 10px;
 }
 
-/* Cards */
+/* CARDS - FIXED! Text will be BLACK or RED */
 .cards {
   display: flex;
   justify-content: center;
@@ -217,7 +220,7 @@ body {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   position: relative;
   transition: transform 0.3s;
-  color: black; /* ADDED: Default black text */
+  color: black !important; /* FORCE BLACK TEXT on white cards */
 }
 
 .card:hover {
@@ -225,19 +228,19 @@ body {
 }
 
 .card.red {
-  color: #ff4757; /* Red for hearts & diamonds */
+  color: #ff4757 !important; /* FORCE RED TEXT for hearts/diamonds */
 }
 
 .card.back {
   background: linear-gradient(45deg, #2d1b69, #00d4ff);
-  color: white !important; /* Force white text for back of cards */
+  color: white !important; /* FORCE WHITE TEXT for back of cards */
 }
 
 .card.back:after {
   content: "?";
   font-size: 3rem;
   font-weight: bold;
-  color: white;
+  color: white !important;
 }
 
 .card-value {
@@ -245,12 +248,12 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
-  color: inherit; /* Inherits from parent (.card or .card.red) */
+  color: inherit !important; /* Inherit from .card or .card.red */
 }
 
 .card-suit {
   font-size: 2.5rem;
-  color: inherit; /* Inherits from parent (.card or .card.red) */
+  color: inherit !important; /* Inherit from .card or .card.red */
 }
 
 /* Score */
@@ -305,21 +308,19 @@ body {
   justify-content: center;
   gap: 10px;
   min-width: 180px;
+  color: white; /* Button text is white */
 }
 
 .btn-primary {
   background: linear-gradient(to right, #61dafb, #21a1f1);
-  color: white;
 }
 
 .btn-action {
   background: linear-gradient(to right, #4CAF50, #2E7D32);
-  color: white;
 }
 
 .btn-secondary {
   background: rgba(255, 255, 255, 0.1);
-  color: white;
   border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -344,6 +345,7 @@ body {
   border-radius: 20px;
   padding: 25px;
   border: 1px solid rgba(97, 218, 251, 0.3);
+  color: white; /* Explicit white text */
 }
 
 .tech-panel h3 {
@@ -367,6 +369,7 @@ body {
   border-radius: 8px;
   border-left: 4px solid #61dafb;
   transition: all 0.3s;
+  color: white; /* List items white */
 }
 
 .tech-panel li:hover {
@@ -379,6 +382,7 @@ body {
   padding: 20px;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 10px;
+  color: white; /* Explicit white text */
 }
 
 .game-info h4 {
@@ -400,6 +404,7 @@ footer {
   background: rgba(0, 0, 0, 0.4);
   border-radius: 20px;
   margin-top: 40px;
+  color: white; /* Explicit white text */
 }
 
 footer h3 {
@@ -514,4 +519,9 @@ footer p {
   min-height: 200px;
   font-size: 1.2rem;
   color: #61dafb;
+}
+
+/* FORCE BLACK TEXT IN CARDS - IMPORTANT FIX */
+.card * {
+  color: inherit !important;
 }
