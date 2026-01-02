@@ -177,32 +177,7 @@ function App() {
     });
   };
 
-  // Card component
-  const Card = ({ card, faceDown }) => (
-    <div className={`card ${card.isRed ? 'red' : ''} ${faceDown ? 'back' : ''}`}>
-      {!faceDown && (
-        <>
-          <div className="card-value">{card.value}</div>
-          <div className="card-suit">{card.suit}</div>
-        </>
-      )}
-    </div>
-  );
-
-  // Chip component
-  const Chip = ({ value, onClick, disabled }) => (
-    <button
-      className="chip"
-      style={{
-        background: `radial-gradient(circle at 30% 30%, ${getChipColor(value)}, ${getChipColor(value)}CC)`
-      }}
-      onClick={() => onClick(value)}
-      disabled={disabled}
-    >
-      ${value}
-    </button>
-  );
-
+  // Chip color function
   const getChipColor = (value) => {
     switch(value) {
       case 10: return '#ff6b6b';
@@ -221,8 +196,9 @@ function App() {
       </header>
 
       <div className="game-container">
+        {/* Left Panel - Stats */}
         <div className="stats-panel">
-          <h3>📊 Player Stats</h3>
+          <h3><span role="img" aria-label="chart">📊</span> Player Stats</h3>
           <div className="stat">
             <span className="stat-label">Bankroll:</span>
             <span className="stat-value">${gameState.bankroll}</span>
@@ -241,15 +217,21 @@ function App() {
           </div>
           
           <div className="betting-section">
-            <h3>💰 Place Bet</h3>
+            <h3><span role="img" aria-label="coins">💰</span> Place Bet</h3>
             <div className="chips">
               {[10, 25, 50, 100].map(chip => (
-                <Chip
+                <button
                   key={chip}
-                  value={chip}
-                  onClick={placeBet}
+                  className="chip"
+                  style={{
+                    background: `radial-gradient(circle at 30% 30%, ${getChipColor(chip)}, ${getChipColor(chip)}CC)`,
+                    color: chip === 50 ? 'black' : 'white'
+                  }}
+                  onClick={() => placeBet(chip)}
                   disabled={gameState.gameActive || gameState.bankroll < chip}
-                />
+                >
+                  ${chip}
+                </button>
               ))}
             </div>
             <button 
@@ -271,16 +253,23 @@ function App() {
           </div>
         </div>
 
+        {/* Center Panel - Game Table */}
         <div className="game-table">
           <div className="dealer-section">
-            <h3>🤖 Dealer's Hand</h3>
+            <h3><span role="img" aria-label="robot">🤖</span> Dealer's Hand</h3>
             <div className="cards">
               {gameState.dealerHand.map((card, index) => (
-                <Card
+                <div 
                   key={index}
-                  card={card}
-                  faceDown={gameState.gameActive && index === 0}
-                />
+                  className={`card ${card.isRed ? 'red' : ''} ${gameState.gameActive && index === 0 ? 'back' : ''}`}
+                >
+                  {!(gameState.gameActive && index === 0) && (
+                    <>
+                      <div className="card-value">{card.value}</div>
+                      <div className="card-suit">{card.suit}</div>
+                    </>
+                  )}
+                </div>
               ))}
             </div>
             <div className="score">
@@ -295,10 +284,16 @@ function App() {
           </div>
 
           <div className="player-section">
-            <h3>👤 Your Hand</h3>
+            <h3><span role="img" aria-label="user">👤</span> Your Hand</h3>
             <div className="cards">
               {gameState.playerHand.map((card, index) => (
-                <Card key={index} card={card} />
+                <div 
+                  key={index}
+                  className={`card ${card.isRed ? 'red' : ''}`}
+                >
+                  <div className="card-value">{card.value}</div>
+                  <div className="card-suit">{card.suit}</div>
+                </div>
               ))}
             </div>
             <div className="score">
@@ -309,30 +304,31 @@ function App() {
           <div className="controls">
             {!gameState.gameActive && gameState.currentBet > 0 ? (
               <button className="btn-primary" onClick={dealCards}>
-                🃏 Deal Cards
+                <span role="img" aria-label="cards">🃏</span> Deal Cards
               </button>
             ) : gameState.gameActive ? (
               <>
                 <button className="btn-action" onClick={playerHit}>
-                  ➕ Hit
+                  <span role="img" aria-label="plus">➕</span> Hit
                 </button>
                 <button className="btn-action" onClick={playerStand}>
-                  ✋ Stand
+                  <span role="img" aria-label="hand">✋</span> Stand
                 </button>
               </>
             ) : null}
             
             <button className="btn-secondary" onClick={resetGame}>
-              🔄 New Game
+              <span role="img" aria-label="refresh">🔄</span> New Game
             </button>
           </div>
         </div>
 
+        {/* Right Panel - Tech Info */}
         <div className="tech-panel">
-          <h3>⚛️ React Features Demonstrated</h3>
+          <h3><span role="img" aria-label="react">⚛️</span> React Features Demonstrated</h3>
           <ul>
             <li>✅ useState Hook for game state</li>
-            <li>✅ Functional Components (Card, Chip)</li>
+            <li>✅ Functional Components</li>
             <li>✅ Component Composition</li>
             <li>✅ Event Handling</li>
             <li>✅ Conditional Rendering</li>
@@ -341,7 +337,7 @@ function App() {
           </ul>
           
           <div className="game-info">
-            <h4>🎮 Game Rules:</h4>
+            <h4><span role="img" aria-label="game">🎮</span> Game Rules:</h4>
             <p>• Get as close to 21 as possible without going over</p>
             <p>• Beat the dealer's hand to win</p>
             <p>• Aces count as 1 or 11</p>
