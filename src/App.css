@@ -217,6 +217,7 @@ body {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   position: relative;
   transition: transform 0.3s;
+  color: black; /* ADDED: Default black text */
 }
 
 .card:hover {
@@ -224,18 +225,19 @@ body {
 }
 
 .card.red {
-  color: #ff4757;
+  color: #ff4757; /* Red for hearts & diamonds */
 }
 
 .card.back {
   background: linear-gradient(45deg, #2d1b69, #00d4ff);
-  color: white;
+  color: white !important; /* Force white text for back of cards */
 }
 
 .card.back:after {
   content: "?";
   font-size: 3rem;
   font-weight: bold;
+  color: white;
 }
 
 .card-value {
@@ -243,10 +245,12 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
+  color: inherit; /* Inherits from parent (.card or .card.red) */
 }
 
 .card-suit {
   font-size: 2.5rem;
+  color: inherit; /* Inherits from parent (.card or .card.red) */
 }
 
 /* Score */
