@@ -192,7 +192,7 @@ function App() {
     <div className="App">
       <header className="header">
         <h1>🎰 Starlight Blackjack <span className="react-badge">React</span></h1>
-        <p>Complete React Game with Logic | For FYB Technologies</p>
+        <p>Complete React Game with Logic</p>
       </header>
 
       <div className="game-container">
@@ -347,7 +347,7 @@ function App() {
       </div>
 
       <footer>
-        <h3>FYB Technologies - Game Developer Portfolio</h3>
+        <h3>Game Developer Portfolio</h3>
         <p>Complete React implementation with game logic, state management, and component architecture.</p>
         <p>Deployed on Vercel | Built with Create-React-App</p>
       </footer>
